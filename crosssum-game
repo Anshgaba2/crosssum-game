@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cross Sum Puzzle Game</title>
+    
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="styles/game.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Header -->
+        <div class="game-header">
+            <h1 class="game-title">Cross Sum Puzzle Game</h1>
+            <div class="game-stats">
+                <div class="stat-item">Puzzle: <span id="puzzleNumber">1</span>/<span id="totalPuzzles">10</span></div>
+                <div class="stat-item">Score: <span id="score">0</span></div>
+                <div class="stat-item">Moves: <span id="moves">0</span></div>
+                <div class="stat-item">Difficulty: <span id="difficulty">Easy</span></div>
+            </div>
+        </div>
+
+        <!-- Game Controls -->
+        <div class="controls">
+            <div class="control-group">
+                <label for="difficultySelect">Difficulty:</label>
+                <select id="difficultySelect" class="control-select">
+                    <option value="easy">Easy (1-5)</option>
+                    <option value="medium">Medium (1-7)</option>
+                    <option value="hard">Hard (1-9)</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label for="gridSizeSelect">Grid Size:</label>
+                <select id="gridSizeSelect" class="control-select">
+                    <option value="3">3×3</option>
+                    <option value="4">4×4</option>
+                    <option value="5">5×5</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="action-controls">
+            <button id="prevBtn" class="btn btn-primary">← Previous</button>
+            <button id="resetBtn" class="btn btn-success">🔄 Reset</button>
+            <button id="newPuzzleBtn" class="btn btn-info">🎲 Random Puzzle</button>
+            <button id="hintBtn" class="btn btn-warning">💡 Hint (-5 moves)</button>
+            <button id="solutionBtn" class="btn btn-secondary">👁️ Solution</button>
+            <button id="nextBtn" class="btn btn-primary">Next →</button>
+        </div>
+
+        <!-- Puzzle Grid Container -->
+        <div class="puzzle-container">
+            <div class="grid-wrapper">
+                <div id="colTargets" class="col-targets">
+                    <div class="corner-cell"></div>
+                </div>
+                <div id="gameGrid" class="game-grid"></div>
+            </div>
+            
+            <!-- Grid Legend -->
+            <div class="grid-legend">
+                <div class="legend-item">
+                    <div class="legend-color target-correct"></div>
+                    <span>Correct sum</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color target-over"></div>
+                    <span>Sum too high</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color target-default"></div>
+                    <span>Incomplete</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completion Message -->
+        <div id="completionMessage" class="completion-message" style="display: none;">
+            <div class="completion-content">
+                <h2 class="completion-title">🎉 Puzzle Complete!</h2>
+                <div class="completion-stats">
+                    <p id="completionText">Great job!</p>
+                    <p id="scoreText">Points earned: +0</p>
+                    <p id="performanceText"></p>
+                </div>
+                <button id="nextPuzzleBtn" class="btn btn-large btn-primary">▶️ Next Puzzle</button>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div class="instructions">
+            <button class="instructions-toggle" id="instructionsToggle">
+                <span class="toggle-icon">▼</span>
+                How to Play
+            </button>
+            <div class="instructions-content" id="instructionsContent">
+                <div class="instruction-grid">
+                    <div class="instruction-section">
+                        <h3>🎯 Objective</h3>
+                        <p>Fill the grid with numbers so each row and column adds up to its target sum.</p>
+                    </div>
+                    <div class="instruction-section">
+                        <h3>📝 Rules</h3>
+                        <ul>
+                            <li>Use only numbers within the difficulty range</li>
+                            <li>Each cell must contain exactly one number</li>
+                            <li>Row sums must match targets on the left</li>
+                            <li>Column sums must match targets on top</li>
+                            <li>Numbers can be repeated in same row/column</li>
+                        </ul>
+                    </div>
+                    <div class="instruction-section">
+                        <h3>🎨 Visual Cues</h3>
+                        <ul>
+                            <li><span class="color-demo target-correct"></span> Green = Correct sum</li>
+                            <li><span class="color-demo target-over"></span> Red = Sum too high</li>
+                            <li><span class="color-demo target-default"></span> Gray = Incomplete</li>
+                        </ul>
+                    </div>
+                    <div class="instruction-section">
+                        <h3>💡 Tips</h3>
+                        <ul>
+                            <li>Start with smaller target sums</li>
+                            <li>Look for unique number combinations</li>
+                            <li>Use process of elimination</li>
+                            <li>Pay attention to maximum possible sums</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load JavaScript files -->
+    <script src="data/levels.js"></script>
+    <script src="scripts/game.js"></script>
+</body>
+</html>
